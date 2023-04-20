@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         POE.com.View
 // @namespace    https://github.com/hobbymarks
-// @version      1.0
+// @version      1.0.1
 // @description  Tampermonkey script for Chrome to view POE.com
 // @author       hobbymarks
 // @match        https://poe.com/*
