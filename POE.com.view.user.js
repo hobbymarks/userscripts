@@ -5,7 +5,7 @@
 // @description  Tampermonkey script for Chrome to view POE.com
 // @author       hobbymarks
 // @match        https://poe.com/
-// @match        https://poe.com/*
+// @match        https://poe.com/*/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=poe.com
 // @grant        GM_addStyle
 // ==/UserScript==
