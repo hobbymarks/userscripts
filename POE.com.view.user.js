@@ -4,16 +4,16 @@
 // @version      1.0
 // @description  Tampermonkey script for Chrome to view POE.com
 // @author       hobbymarks
-// @match        https://poe.com
+// @match        https://poe.com/
 // @match        https://poe.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=poe.com
 // @grant        GM_addStyle
 // ==/UserScript==
 
-// Hide Scroll Bar
-GM_addStyle(".no-scrollbar::-webkit-scrollbar { display: none; }");
-
 function hideScrollBar() {
+  // Hide Scroll Bar
+  GM_addStyle(".no-scrollbar::-webkit-scrollbar { display: none; }");
+
   const elementsToHideScrollbar = document.querySelectorAll(
     '[class*="ChatPageSidebar_sidebarContainer__"]'
   );
@@ -45,6 +45,7 @@ function actions() {
     });
   }
 
+  // Add monitor for window resize action
   window.addEventListener("resize", function () {
     // console.log("window resize ...");
     actions();
