@@ -10,47 +10,43 @@
 // @grant        GM_addStyle
 // ==/UserScript==
 
-function viewMax(elements){
-    // Do view max with the selected elements
-    for (let i = 0; i < elements.length; i++) {
-        const element = elements[i];
-        element.style.width = "100%";
-        element.style.maxWidth = "100%";
-
-    }
-}
-
-
 // Hide Scroll Bar
-GM_addStyle('.no-scrollbar::-webkit-scrollbar { display: none; }');
-const elementsToHideScrollbar=document.querySelectorAll('[class*="ChatPageSidebar_sidebarContainer__"]');
-for(let i=0;i<elementsToHideScrollbar.length;i++){
-    console.log("[HideScrollBar]",elementsToHideScrollbar[i]);
-    elementsToHideScrollbar[i].classList.add('no-scrollbar');
+GM_addStyle(".no-scrollbar::-webkit-scrollbar { display: none; }");
+
+function hideScrollBar() {
+  const elementsToHideScrollbar = document.querySelectorAll(
+    '[class*="ChatPageSidebar_sidebarContainer__"]'
+  );
+  for (let i = 0; i < elementsToHideScrollbar.length; i++) {
+    console.log("[HideScrollBar]", elementsToHideScrollbar[i]);
+    elementsToHideScrollbar[i].classList.add("no-scrollbar");
+  }
 }
 
+function actions() {
+  hideScrollBar();
+}
 
-(function() {
-    'use strict';
-    // Set Line Height
-    const lineHeightElements=document.querySelectorAll('div');
-    for (var i = 0; i < lineHeightElements.length; i++) {
-        lineHeightElements[i].style.lineHeight = '1.0';
-    }
+(function () {
+  "use strict";
+  // line Height
+  actions();
 
-    // Select all elements with a class name that contains "example"
-    const elements = document.querySelectorAll('[class*="PageWithSidebarLayout_mainSection__"]');
-    // View max the elements
-    viewMax(elements);
+  // Retrive all links in left side menu
+  const sideLinks = document.querySelectorAll(
+    '[class*="PageWithSidebarNavItem_navItem__"]'
+  );
 
-    // Retrive all links
-    const sideLinks=document.querySelectorAll('[class*="PageWithSidebarNavItem_navItem__"]');
-    // Add monitor to click
-    for (let i=0;i<sideLinks.length;i++){
-        sideLinks[i].addEventListener('click', function(event) {
-            console.log('Clicked link:', event.target.href);
-            const elements = document.querySelectorAll('[class*="PageWithSidebarLayout_mainSection__"]');
-            viewMax(elements);
-        });
-    };
+  // Add monitor to click
+  for (let i = 0; i < sideLinks.length; i++) {
+    sideLinks[i].addEventListener("click", function (event) {
+      // console.log("click link ...");
+      actions();
+    });
+  }
+
+  window.addEventListener("resize", function () {
+    // console.log("window resize ...");
+    actions();
+  });
 })();
