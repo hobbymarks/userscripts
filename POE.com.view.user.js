@@ -18,7 +18,7 @@ function hideScrollBar() {
     '[class*="ChatPageSidebar_sidebarContainer__"]'
   );
   for (let i = 0; i < elementsToHideScrollbar.length; i++) {
-    console.log("[HideScrollBar]", elementsToHideScrollbar[i]);
+    // console.log("[HideScrollBar]", elementsToHideScrollbar[i]);
     elementsToHideScrollbar[i].classList.add("no-scrollbar");
   }
 }
