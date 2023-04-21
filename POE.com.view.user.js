@@ -2,7 +2,7 @@
 // @name         POE.com.View
 // @run-at       document-idle
 // @namespace    https://github.com/hobbymarks
-// @version      1.0.3
+// @version      1.0.4
 // @description  Tampermonkey script for Chrome to view POE.com
 // @author       hobbymarks
 // @match        https://poe.com/
@@ -16,9 +16,11 @@ function hideScrollBar() {
     '[class*="ChatPageSidebar_sidebarContainer__"]'
   );
 
-  elementsToHideScrollbar.forEach((element) => {
-  GM_addStyle(`.${element.classList.item(0)}::-webkit-scrollbar {display: none;}`);
-  
+  elementsToHideScrollbar.forEach((element) =>
+    GM_addStyle(
+      `.${element.classList.item(0)}::-webkit-scrollbar {display: none;}`
+    )
+  );
 }
 
 function actions() {
