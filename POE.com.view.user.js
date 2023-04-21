@@ -16,11 +16,20 @@ function hideScrollBar() {
     '[class*="ChatPageSidebar_sidebarContainer__"]'
   );
 
-  elementsToHideScrollbar.forEach((element) =>
-    GM_addStyle(
-      `.${element.classList.item(0)}::-webkit-scrollbar {display: none;}`
-    )
-  );
+  elementsToHideScrollbar.forEach((element) => {
+    const computedStyle = window.getComputedStyle(
+      element,
+      "::-webkit-scrollbar"
+    );
+    console.log("display:", computedStyle.getPropertyValue("display"));
+    if (/display\s*:\s*none/i.test(computedStyle.getPropertyValue("display"))) {
+      console.log("exist", "webkit-scrollbar:{display:none}");
+    } else {
+      GM_addStyle(
+        `.${element.classList.item(0)}::-webkit-scrollbar {display: none;}`
+      );
+    }
+  });
 }
 
 function actions() {
