@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         POE.com.View_Debug
+// @name         POE.com.View
 // @run-at       document-idle
 // @namespace    https://github.com/hobbymarks
 // @version      1.0.3
@@ -12,16 +12,13 @@
 // ==/UserScript==
 
 function hideScrollBar() {
-  // Hide Scroll Bar
-  GM_addStyle(".no-scrollbar::-webkit-scrollbar { display: none; }");
-
   const elementsToHideScrollbar = document.querySelectorAll(
     '[class*="ChatPageSidebar_sidebarContainer__"]'
   );
-  for (let i = 0; i < elementsToHideScrollbar.length; i++) {
-    console.log(new Date(), "[HideScrollBar]", elementsToHideScrollbar[i]);
-    elementsToHideScrollbar[i].classList.add("no-scrollbar");
-  }
+
+  elementsToHideScrollbar.forEach((element) => {
+  GM_addStyle(`.${element.classList.item(0)}::-webkit-scrollbar {display: none;}`);
+  
 }
 
 function actions() {
@@ -30,7 +27,6 @@ function actions() {
 
 (function () {
   "use strict";
-  // line Height
   actions();
 
   // Retrive all links in left side menu
