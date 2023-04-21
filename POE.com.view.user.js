@@ -2,7 +2,7 @@
 // @name         POE.com.View
 // @run-at       document-idle
 // @namespace    https://github.com/hobbymarks
-// @version      1.0.4
+// @version      1.0.5
 // @description  Tampermonkey script for Chrome to view POE.com
 // @author       hobbymarks
 // @match        https://poe.com/
@@ -12,48 +12,64 @@
 // ==/UserScript==
 
 function hideScrollBar() {
-  const elementsToHideScrollbar = document.querySelectorAll(
-    '[class*="ChatPageSidebar_sidebarContainer__"]'
-  );
+    const elementsToHideScrollbar = document.querySelectorAll(
+        '[class*="ChatPageSidebar_sidebarContainer__"]'
+    );
 
-  elementsToHideScrollbar.forEach((element) =>
-    GM_addStyle(
-      `.${element.classList.item(0)}::-webkit-scrollbar {display: none;}`
-    )
-  );
+    elementsToHideScrollbar.forEach((element) =>
+        GM_addStyle(
+            `.${element.classList.item(0)}::-webkit-scrollbar {display: none;}`
+        )
+    );
+}
+
+function unsetMainWidth() {
+    const elementsUnsetWidth = document.querySelectorAll(
+        '[class*="PageWithSidebarLayout_mainSection__"]'
+    );
+
+    elementsUnsetWidth.forEach((element) => {
+        // Remove the 'width' and 'max-width' properties
+        element.style.removeProperty("width");
+        element.style.removeProperty("max-width");
+        // Set the 'width' and 'max-width' properties to 'unset'
+        element.style.setProperty("width", "unset");
+        element.style.setProperty("max-width", "unset");
+    });
 }
 
 function actions() {
-  hideScrollBar();
+    hideScrollBar();
+    unsetMainWidth();
 }
 
 (function () {
-  "use strict";
-  actions();
+    "use strict";
+    actions();
 
-  // Retrive all links in left side menu
-  const sideLinks = document.querySelectorAll(
-    '[class*="PageWithSidebarNavItem_navItem__"]'
-  );
+    // Retrive all links in left side menu
+    const sideLinks = document.querySelectorAll(
+        '[class*="PageWithSidebarNavItem_navItem__"]'
+    );
 
-  // Add monitor to click
-  for (let i = 0; i < sideLinks.length; i++) {
-    sideLinks[i].addEventListener("click", function (event) {
-      // console.log(new Date(), "click leftsidemenu link ...");
-      actions();
+    // Add monitor to click
+    for (let i = 0; i < sideLinks.length; i++) {
+        sideLinks[i].addEventListener("click", function (event) {
+            // console.log(new Date(), "click leftsidemenu link ...");
+            actions();
+        });
+    }
+
+    // Add monitor to logo click
+    const logo = document.querySelectorAll('[class*="ChatPageSidebar_logo__"]');
+    logo[0].addEventListener("click", function (event) {
+        // console.log(new Date(), "click logo ...");
+        actions();
     });
-  }
 
-  // Add monitor to logo click
-  const logo = document.querySelectorAll('[class*="ChatPageSidebar_logo__"]');
-  logo[0].addEventListener("click", function (event) {
-    // console.log(new Date(), "click logo ...");
-    actions();
-  });
-
-  // Add monitor for window resize action
-  window.addEventListener("resize", function () {
-    // console.log(new Date(),"window resize ...");
-    actions();
-  });
+    // Add monitor for window resize action
+    window.addEventListener("resize", function () {
+        // console.log(new Date(),"window resize ...");
+        actions();
+    });
 })();
