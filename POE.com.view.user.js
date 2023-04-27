@@ -2,7 +2,7 @@
 // @name         POE.com.View
 // @run-at       document-idle
 // @namespace    https://github.com/hobbymarks
-// @version      1.0.6
+// @version      1.0.7
 // @description  Tampermonkey script for Chrome to view POE.com
 // @author       hobbymarks
 // @match        https://poe.com/
@@ -55,6 +55,7 @@ function unsetMainWidth() {
 function actions() {
     hideScrollBar();
     unsetMainWidth();
+    setLeftSideMenuWidth();
 }
 
 (function () {
@@ -84,7 +85,6 @@ function actions() {
     // Add monitor for window resize action
     window.addEventListener("resize", function () {
         // console.log(new Date(),"window resize ...");
-        setLeftSideMenuWidth();
         actions();
     });
 })();
