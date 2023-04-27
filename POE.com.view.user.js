@@ -2,7 +2,7 @@
 // @name         POE.com.View
 // @run-at       document-idle
 // @namespace    https://github.com/hobbymarks
-// @version      1.0.5
+// @version      1.0.6
 // @description  Tampermonkey script for Chrome to view POE.com
 // @author       hobbymarks
 // @match        https://poe.com/
@@ -10,6 +10,20 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=poe.com
 // @grant        GM_addStyle
 // ==/UserScript==
+
+function setLeftSideMenuWidth() {
+    const leftSideMenu = document.querySelector(
+        '[class*="PageWithSidebarLayout_leftSidebar__"]'
+    );
+    //console.log(leftSideMenu);
+    if (window.innerWidth <= 800) {
+        leftSideMenu.style.minWidth = "0px";
+    } else if (window.innerWidth <= 892) {
+        leftSideMenu.style.minWidth = "92px";
+    } else if (window.innerWidth >= 1010) {
+        leftSideMenu.style.minWidth = "210px";
+    }
+}
 
 function hideScrollBar() {
     const elementsToHideScrollbar = document.querySelectorAll(
@@ -70,6 +84,7 @@ function actions() {
     // Add monitor for window resize action
     window.addEventListener("resize", function () {
         // console.log(new Date(),"window resize ...");
+        setLeftSideMenuWidth();
         actions();
     });
 })();
