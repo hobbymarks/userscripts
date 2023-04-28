@@ -12,16 +12,11 @@
 // ==/UserScript==
 
 function setlayoutSideBarWidth() {
-    const layoutSideBar = document.querySelector(
-        '[class*="Layout-sidebar"]'
-    );
+    const layoutSideBar = document.querySelector('[class*="Layout-sidebar"]');
     //console.log(layoutSideBar);
-    if (window.innerWidth <= 800) {
-        layoutSideBar.style.minWidth = "0px";
-    } else if (window.innerWidth <= 892) {
-        layoutSideBar.style.minWidth = "92px";
-    } else if (window.innerWidth >= 1010) {
-        layoutSideBar.style.minWidth = "210px";
+    if (window.innerWidth <= 892) {
+        layoutSideBar.style.minWidth = "auto";
+        layoutSideBar.style.width = "196px";
     }
 }
 
