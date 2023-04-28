@@ -2,7 +2,7 @@
 // @name         GitHub.com.View
 // @run-at       document-idle
 // @namespace    https://github.com/hobbymarks
-// @version      1.0.1
+// @version      1.0.1.2
 // @description  Tampermonkey script for Chrome to view GitHub.com
 // @author       hobbymarks
 // @match        https://github.com/
@@ -17,10 +17,10 @@ const layoutSideBar = document.querySelector('[class*="Layout-sidebar"]');
 //
 function setlayoutSideBarWidth(element) {
     //console.log(element);
-    if (window.innerWidth <= 892) {
+    if (window.innerWidth <= 960) {
         element.style.minWidth = "auto";
-        element.style.width = "196px";
-    } else if (window.innerWidth <= 1024) {
+        element.style.width = "108px";
+    } else if (window.innerWidth >= 1024) {
         element.style.minWidth = "auto";
         element.style.width = localStorage.getItem(
             "GitHub_Layout_SideBar_Width"
