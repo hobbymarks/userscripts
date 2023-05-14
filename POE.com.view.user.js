@@ -2,7 +2,7 @@
 // @name         POE.com.View
 // @run-at       document-idle
 // @namespace    https://github.com/hobbymarks
-// @version      1.0.7
+// @version      1.0.8
 // @description  Tampermonkey script for Chrome to view POE.com
 // @author       hobbymarks
 // @match        https://poe.com/
@@ -50,6 +50,32 @@ function unsetMainWidth() {
         element.style.setProperty("width", "unset");
         element.style.setProperty("max-width", "unset");
     });
+
+    const nelementsUnsetWidth = document.querySelectorAll(
+        '[class*="NewPageWithSidebarLayout_mainSection__"]'
+    );
+
+    nelementsUnsetWidth.forEach((element) => {
+        // Remove the 'width' and 'max-width' properties
+        element.style.removeProperty("width");
+        element.style.removeProperty("max-width");
+        // Set the 'width' and 'max-width' properties to 'unset'
+        element.style.setProperty("width", "unset");
+        element.style.setProperty("max-width", "unset");
+    });
+
+    const nnelementsUnsetWidth = document.querySelectorAll(
+        '[class*="Message_botMessageBubble__CPGMI"]'
+    );
+
+    nnelementsUnsetWidth.forEach((element) => {
+        // Remove the 'width' and 'max-width' properties
+        element.style.removeProperty("width");
+        element.style.removeProperty("max-width");
+        // Set the 'width' and 'max-width' properties to 'unset'
+        element.style.setProperty("width", "unset");
+        element.style.setProperty("max-width", "unset");
+    }); 
 }
 
 function actions() {
