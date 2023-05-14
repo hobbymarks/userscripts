@@ -2,7 +2,7 @@
 // @name         POE.com.View
 // @run-at       document-idle
 // @namespace    https://github.com/hobbymarks
-// @version      1.0.8
+// @version      1.0.9
 // @description  Tampermonkey script for Chrome to view POE.com
 // @author       hobbymarks
 // @match        https://poe.com/
@@ -37,45 +37,33 @@ function hideScrollBar() {
     );
 }
 
+function unsetWidthMaxWidth(element) {
+    // Remove the 'width' and 'max-width' properties
+    element.style.removeProperty("width");
+    element.style.removeProperty("max-width");
+    // Set the 'width' and 'max-width' properties to 'unset'
+    element.style.setProperty("width", "unset");
+    element.style.setProperty("max-width", "unset");
+}
+
 function unsetMainWidth() {
-    const elementsUnsetWidth = document.querySelectorAll(
-        '[class*="PageWithSidebarLayout_mainSection__"]'
-    );
+    document
+        .querySelectorAll('[class*="PageWithSidebarLayout_mainSection__"]')
+        .forEach((element) => {
+            unsetWidthMaxWidth(element);
+        });
 
-    elementsUnsetWidth.forEach((element) => {
-        // Remove the 'width' and 'max-width' properties
-        element.style.removeProperty("width");
-        element.style.removeProperty("max-width");
-        // Set the 'width' and 'max-width' properties to 'unset'
-        element.style.setProperty("width", "unset");
-        element.style.setProperty("max-width", "unset");
-    });
+    document
+        .querySelectorAll('[class*="NewPageWithSidebarLayout_mainSection__"]')
+        .forEach((element) => {
+            unsetWidthMaxWidth(element);
+        });
 
-    const nelementsUnsetWidth = document.querySelectorAll(
-        '[class*="NewPageWithSidebarLayout_mainSection__"]'
-    );
-
-    nelementsUnsetWidth.forEach((element) => {
-        // Remove the 'width' and 'max-width' properties
-        element.style.removeProperty("width");
-        element.style.removeProperty("max-width");
-        // Set the 'width' and 'max-width' properties to 'unset'
-        element.style.setProperty("width", "unset");
-        element.style.setProperty("max-width", "unset");
-    });
-
-    const nnelementsUnsetWidth = document.querySelectorAll(
-        '[class*="Message_botMessageBubble__CPGMI"]'
-    );
-
-    nnelementsUnsetWidth.forEach((element) => {
-        // Remove the 'width' and 'max-width' properties
-        element.style.removeProperty("width");
-        element.style.removeProperty("max-width");
-        // Set the 'width' and 'max-width' properties to 'unset'
-        element.style.setProperty("width", "unset");
-        element.style.setProperty("max-width", "unset");
-    }); 
+    document
+        .querySelectorAll('[class*="Message_botMessageBubble__CPGMI"]')
+        .forEach((element) => {
+            unsetWidthMaxWidth(element);
+        });
 }
 
 function actions() {
@@ -88,25 +76,33 @@ function actions() {
     "use strict";
     actions();
 
-    // Retrive all links in left side menu
-    const sideLinks = document.querySelectorAll(
-        '[class*="PageWithSidebarNavItem_navItem__"]'
-    );
-
-    // Add monitor to click
-    for (let i = 0; i < sideLinks.length; i++) {
-        sideLinks[i].addEventListener("click", function (event) {
-            // console.log(new Date(), "click leftsidemenu link ...");
-            actions();
+    // Add monitor to click for all links in left side menu
+    document
+        .querySelectorAll('[class*="PageWithSidebarNavItem_navItem__"]')
+        .forEach((element) => {
+            element.addEventListener("click", function (event) {
+                // console.log(new Date(), "click leftsidemenu link ...");
+                actions();
+            });
         });
-    }
+    document
+        .querySelectorAll('[class*="PageWithSidebarNavItem_newNavItem__"]')
+        .forEach((element) => {
+            element.addEventListener("click", function (event) {
+                // console.log(new Date(), "click leftsidemenu link ...");
+                actions();
+            });
+        });
 
     // Add monitor to logo click
-    const logo = document.querySelectorAll('[class*="ChatPageSidebar_logo__"]');
-    logo[0].addEventListener("click", function (event) {
-        // console.log(new Date(), "click logo ...");
-        actions();
-    });
+    document
+        .querySelectorAll('[class*="ChatPageSidebar_logo__"]')
+        .forEach((element) => {
+            element.addEventListener("click", function (event) {
+                // console.log(new Date(), "click logo ...");
+                actions();
+            });
+        });
 
     // Add monitor for window resize action
     window.addEventListener("resize", function () {
