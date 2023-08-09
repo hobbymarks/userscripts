@@ -79,6 +79,7 @@
 
     // Loop through the style sheets to find the desired rule
     for (var i = 0; i < styleSheets.length; i++) {
+        console.log('styleSheets length:'+styleSheets.length);
         var styleSheet = styleSheets[i];
 
         // Check if the styleSheet is accessible (to handle cross-origin restrictions)
