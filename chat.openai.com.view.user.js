@@ -2,7 +2,7 @@
 // @name         chat.openai.com.View
 // @run-at       document-idle
 // @namespace    https://github.com/hobbymarks
-// @version      0.0.1
+// @version      0.0.2
 // @description  Tampermonkey script for Chrome to view chat.openai.com
 // @author       hobbymarks
 // @match        https://chat.openai.com/
@@ -79,7 +79,7 @@
 
     // Loop through the style sheets to find the desired rule
     for (var i = 0; i < styleSheets.length; i++) {
-        console.log('styleSheets length:'+styleSheets.length);
+        console.log('styleSheets length:' + styleSheets.length);
         var styleSheet = styleSheets[i];
 
         // Check if the styleSheet is accessible (to handle cross-origin restrictions)
