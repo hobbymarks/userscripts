@@ -2,7 +2,7 @@
 // @name         chat.openai.com.View
 // @run-at       document-idle
 // @namespace    https://github.com/hobbymarks
-// @version      1.0.0
+// @version      0.0.1
 // @description  Tampermonkey script for Chrome to view chat.openai.com
 // @author       hobbymarks
 // @match        https://chat.openai.com/
@@ -72,41 +72,70 @@
 //     setLeftSideMenuWidth();
 // }
 
-// (function () {
-//     "use strict";
-//     actions();
+(function () {
+    "use strict";
+    // Get the stylesheets collection
+    var styleSheets = document.styleSheets;
 
-//     // Add monitor to click for all links in left side menu
-//     document
-//         .querySelectorAll('[class*="PageWithSidebarNavItem_navItem__"]')
-//         .forEach((element) => {
-//             element.addEventListener("click", function (event) {
-//                 // console.log(new Date(), "click leftsidemenu link ...");
-//                 actions();
-//             });
-//         });
-//     document
-//         .querySelectorAll('[class*="PageWithSidebarNavItem_newNavItem__"]')
-//         .forEach((element) => {
-//             element.addEventListener("click", function (event) {
-//                 // console.log(new Date(), "click leftsidemenu link ...");
-//                 actions();
-//             });
-//         });
+    // Loop through the style sheets to find the desired rule
+    for (var i = 0; i < styleSheets.length; i++) {
+        var styleSheet = styleSheets[i];
 
-//     // Add monitor to logo click
-//     document
-//         .querySelectorAll('[class*="ChatPageSidebar_logo__"]')
-//         .forEach((element) => {
-//             element.addEventListener("click", function (event) {
-//                 // console.log(new Date(), "click logo ...");
-//                 actions();
-//             });
-//         });
+        // Check if the styleSheet is accessible (to handle cross-origin restrictions)
+        if (!styleSheet.cssRules) continue;
 
-//     // Add monitor for window resize action
-//     window.addEventListener("resize", function () {
-//         // console.log(new Date(),"window resize ...");
-//         actions();
-//     });
-// })();
+        // Loop through the rules of the current stylesheet
+        for (var j = 0; j < styleSheet.cssRules.length; j++) {
+            var rule = styleSheet.cssRules[j];
+
+            // Check if the rule is for the desired selector
+            if (rule.selectorText === '.xl\:max-w-3xl') {
+                // Manipulate the CSS properties of the rule
+                // rule.style.color = ''; // Unset the 'color' attribute
+                // rule.style.fontSize = ''; // Unset the 'font-size' attribute
+                console.log(rule.cssText);
+            }
+            if (rule.selectorText === '.lg\:max-w-\[38rem\]') {
+                console.log(rule.cssText);
+            }
+            if (rule.selectorText === '.md\:max-w-2xl') {
+                console.log(rule.cssText);
+            }
+        }
+    }
+    // actions();
+
+    // // Add monitor to click for all links in left side menu
+    // document
+    //     .querySelectorAll('[class*="PageWithSidebarNavItem_navItem__"]')
+    //     .forEach((element) => {
+    //         element.addEventListener("click", function (event) {
+    //             // console.log(new Date(), "click leftsidemenu link ...");
+    //             actions();
+    //         });
+    //     });
+    // document
+    //     .querySelectorAll('[class*="PageWithSidebarNavItem_newNavItem__"]')
+    //     .forEach((element) => {
+    //         element.addEventListener("click", function (event) {
+    //             // console.log(new Date(), "click leftsidemenu link ...");
+    //             actions();
+    //         });
+    //     });
+
+    // // Add monitor to logo click
+    // document
+    //     .querySelectorAll('[class*="ChatPageSidebar_logo__"]')
+    //     .forEach((element) => {
+    //         element.addEventListener("click", function (event) {
+    //             // console.log(new Date(), "click logo ...");
+    //             actions();
+    //         });
+    //     });
+
+    // // Add monitor for window resize action
+    // window.addEventListener("resize", function () {
+    //     // console.log(new Date(),"window resize ...");
+    //     actions();
+    // });
+})();
